@@ -16,10 +16,9 @@ class Account
         void    show_info(void)
         {cout << "user balance: "<< user_balance << endl;
          cout << "user_name: "<< user_name << endl;};
-        
-
     Account();
 };
+
 
 
 
