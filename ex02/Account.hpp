@@ -2,7 +2,6 @@
 #define ACCOUNT_HPP
 
 #include <iostream>
-using namespace	std;
 
 class Account
 {
