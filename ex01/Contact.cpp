@@ -10,36 +10,64 @@ Contact::Contact()
 
 Contact::~Contact()
 {
+    // Destructor
 }
 
-Contact Contact::createContact(void)
-{
+std::string Contact::getInput(const std::string& prompt, bool hasLengthLimit, size_t maxLength) {
+    std::string input;
+    while (true) {
+        std::cout << GREY << prompt << RESET;
+        std::getline(std::cin, input);
+        if (input.empty()) {
+            if (std::cin.eof()) {
+                std::cout << YELLOW << "EOF" << RESET << std::endl;
+                std::cout << "Exiting program" << std::endl;
+                std::exit(0);
+            }
+            std::cout << RED << "Field cannot be empty" << RESET << std::endl;
+            continue;
+        }
+        if (hasLengthLimit && input.length() > maxLength) {
+            input.resize(maxLength);
+            input.replace(maxLength - 1, 1, ".");
+            std::cout << YELLOW    <<"Warning: Input truncated to "
+                      << maxLength << " characters" << RESET
+                      << std::endl;
+        }
+        return input;
+    }
+}
+
+Contact Contact::createContact(void) {
     Contact contact;
     std::string input;
-
-    std::cout << "Enter first name: ";
-    std::getline(std::cin, input);
-    contact.setFirstName(input);
-
-    std::cout << "Enter last name: ";
-    std::getline(std::cin, input);
-    contact.setLastName(input);
-
-    std::cout << "Enter nickname: ";
-    std::getline(std::cin, input);
-    contact.setNickname(input);
-
-    std::cout << "Enter phone number: ";
-    std::getline(std::cin, input);
-    contact.setPhoneNumber(input);
-
+    
+    while (true) {
+        try {
+            contact.setFirstName(getInput("Enter first name: ", true, 10));
+            contact.setLastName(getInput("Enter last name: ", true, 10));
+            contact.setNickname(getInput("Enter nickname: ", true, 10));
+            contact.setPhoneNumber(getInput("Enter phone number: ", false));
+            contact.setDarkestSecret(getInput("Enter darkest secret: ", false));
+            break;
+        } catch (const std::exception& e) {
+            std::cout << "\033[31mError: " << e.what() << "\033[0m" << std::endl;
+            std::cout << "Intentando nuevamente..." << std::endl;
+        }
+    }
     return contact;
 }
 
-void Contact::printContact(void)
+void Contact::printInfo(int index, int width)
 {
-    std::cout << "First Name: " << this->firstName << std::endl;
-    std::cout << "Last Name: " << this->lastName << std::endl;
-    std::cout << "Nickname: " << this->nickname << std::endl;
-    std::cout << "Phone Number: " << this->phoneNumber << std::endl;
+    std::cout << std::setw(width) << std::right << index << "|"
+              << std::setw(width) << std::right << this->firstName << "|"
+              << std::setw(width) << std::right << this->lastName << "|"
+              << std::setw(width) << std::right << this->nickname << "|" << std::endl;
+}
+
+void Contact::printContact(int index)
+{
+    printFields(10);
+    printInfo(index, 10);
 }

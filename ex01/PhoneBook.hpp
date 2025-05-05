@@ -3,6 +3,15 @@
 
 #include "Contact.hpp"
 #include <iostream>
+#include <iomanip>
+#include <limits>
+
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define RESET "\033[0m"
 
 // Your code goes here
 
@@ -11,7 +20,7 @@ class PhoneBook {
         PhoneBook();
         ~PhoneBook();
         void displayContact(int index);
-        void displayContactInfo(void);
+        void displayAllContacts();
         void addContact();
         void searchContact();
         void run();
@@ -20,5 +29,7 @@ class PhoneBook {
         int index;
         int count;
 };
+
+void printFields(int width);
 
 #endif // PHONEBOOK_HPP

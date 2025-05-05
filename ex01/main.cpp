@@ -1,6 +1,5 @@
 #include "PhoneBook.hpp"
 
-
 int main(void) {
     std::cout << "Starting program" << std::endl;
     PhoneBook phoneBook;
@@ -8,3 +7,4 @@ int main(void) {
     std::cout << "Exiting program" << std::endl;
     return 0;
 }
+
