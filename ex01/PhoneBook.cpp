@@ -44,17 +44,17 @@ void PhoneBook::addContact() {
 
 void PhoneBook::searchContact() {
 
-    std::cout << BLUE"Searching contact"RESET << std::endl;
-    std::cout << YELLOW"[Enter index to search (0-7)]"RESET << std::endl;
+    std::cout << BLUE << "Searching contact" << RESET << std::endl;
+    std::cout << YELLOW << "[Enter index to search (0-7)]" << RESET << std::endl;
     std::cin >> index;
     if (std::cin.eof()) {
-        std::cout << YELLOW"EOF"RESET << std::endl;
+        std::cout << YELLOW << "EOF" << RESET << std::endl;
         std::cout << "Exiting program" << std::endl;
         std::exit(0);
     }
     if (index < 0 || index >= count || index >= 8 || std::cin.fail()) {
-        std::cout << RED"Invalid index"RESET << std::endl;
-        std::cout << BLUE"Displaying all contacts"RESET << std::endl;
+        std::cout << RED << "Invalid index" << RESET << std::endl;
+        std::cout << BLUE << "Displaying all contacts" << RESET << std::endl;
         displayAllContacts();
         std::cin.clear();
         return;
@@ -65,7 +65,7 @@ void PhoneBook::searchContact() {
 void PhoneBook::run() {
     std::string command;
     while (true) {
-        std::cout << BLUE"Enter command (ADD, SEARCH, EXIT): "RESET;
+        std::cout << BLUE << "Enter command (ADD, SEARCH, EXIT): " << RESET;
         if (!std::cin) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -73,10 +73,10 @@ void PhoneBook::run() {
         }
         if (!std::getline(std::cin, command)) {
             if (std::cin.eof()) {
-                std::cout << YELLOW"EOF"RESET << std::endl;
+                std::cout << YELLOW << "EOF" << RESET << std::endl;
                 break;
             }
-            std::cout << RED"Error reading command"RESET << std::endl;
+            std::cout << RED << "Error reading command" << RESET << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
@@ -96,7 +96,7 @@ void PhoneBook::run() {
             } else if (command == "EXIT" || command == "exit") {
                 break;
             } else {
-                std::cout << RED"invalid command"RESET << std::endl;
+                std::cout << RED << "invalid command" << RESET << std::endl;
             }
         }
     }
